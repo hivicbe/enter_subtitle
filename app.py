@@ -49,3 +49,9 @@ def extract_subtitle():
 # 🚀 Flask 서버 실행
 if __name__ == "__main__":
     app.run(debug=True)
+
+import os
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render에서 환경변수로 포트를 지정해줌
+    app.run(host="0.0.0.0", port=port, debug=True)
