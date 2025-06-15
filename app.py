@@ -26,12 +26,14 @@ def extract_subtitle():
             "subtitleslangs": ["ko", "en"],
             "subtitlesformat": "vtt",
             "outtmpl": os.path.join(tmpdir, "%(id)s.%(ext)s"),
+            "cookiefile": "cookies.txt"  # 🔐 쿠키 연동
         }
 
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=False)
                 video_id = info["id"]
+
                 vtt_path = os.path.join(tmpdir, f"{video_id}.ko.vtt")
                 if not os.path.exists(vtt_path):
                     vtt_path = os.path.join(tmpdir, f"{video_id}.en.vtt")
@@ -46,7 +48,7 @@ def extract_subtitle():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-# ✅ 서버 포트 바인딩 (Render에서 필수)
+# 🚀 Render 호환 서버 실행
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
