@@ -46,12 +46,7 @@ def extract_subtitle():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-# 🚀 Flask 서버 실행
+# ✅ 서버 포트 바인딩 (Render에서 필수)
 if __name__ == "__main__":
-    app.run(debug=True)
-
-import os
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Render에서 환경변수로 포트를 지정해줌
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
